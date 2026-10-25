@@ -35,7 +35,10 @@ class App extends BaseConfig
 	 *
 	 * @var list<string>
 	 */
-	public array $allowedHostnames = [];
+	public array $allowedHostnames = [
+		'shaii.x10.mx',
+		'www.shaii.x10.mx',
+	];
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -373,6 +376,56 @@ class App extends BaseConfig
 	 * @var array<string, string>
 	 */
 	public array $proxyIPs = [];
+
+	/**
+	 * If baseURL was left at a development default (or an empty value), build
+	 * the origin from the incoming request instead, but only for one of the
+	 * hostnames allowed above. This keeps generated links, assets and login
+	 * redirects on the real site even when .env omits app.baseURL.
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		if (PHP_SAPI === 'cli') {
+			return;
+		}
+
+		$configuredHost = strtolower((string) (parse_url((string) $this->baseURL, PHP_URL_HOST) ?? ''));
+		$isLocal        = $configuredHost === '' || in_array($configuredHost, ['localhost', '127.0.0.1', '::1'], true);
+
+		if (! $isLocal) {
+			return;
+		}
+
+		$requestHost = strtolower(trim((string) ($_SERVER['HTTP_HOST'] ?? '')));
+
+		if ($requestHost === '' || preg_match('/[^a-z0-9.\-:]/', $requestHost) === 1) {
+			return;
+		}
+
+		$hostname = preg_replace('/:\d+$/', '', $requestHost);
+
+		if (
+			$hostname === ''
+			|| filter_var($hostname, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false
+		) {
+			return;
+		}
+
+		$allowed = array_map('strtolower', $this->allowedHostnames);
+
+		if ($allowed !== [] && ! in_array($hostname, $allowed, true)) {
+			return;
+		}
+
+		$isSecure = $this->forceGlobalSecureRequests
+			|| (! empty($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off')
+			|| ($_SERVER['SERVER_PORT'] ?? '') === '443'
+			|| strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https';
+
+		$this->baseURL = ($isSecure ? 'https://' : 'http://') . $requestHost . '/';
+	}
 
 	/**
 	 * --------------------------------------------------------------------------
