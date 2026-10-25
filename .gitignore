@@ -10,10 +10,11 @@ writable/session/*
 writable/logs/*
 !writable/logs/index.html
 
-# Composer-installed dependencies (deploy with composer install, never from VCS)
-/vendor/
 
 # Local environment files (never commit deployment secrets)
 .env
 .env.*
 !.env.example
+
+# Generated deploy artifacts (vendor bundle zip)
+/deploy/
