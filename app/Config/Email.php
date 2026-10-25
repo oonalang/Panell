@@ -168,4 +168,12 @@ class Email extends BaseConfig
 	 */
 	public $DSN = false;
 
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * Which SMTP authentication method to use: login, plain
+     */
+    public string $SMTPAuthMethod = 'login';
+
 }

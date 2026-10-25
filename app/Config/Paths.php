@@ -83,4 +83,19 @@ class Paths
 	 * @var string
 	 */
 	public $viewDirectory = __DIR__ . '/../Views';
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * ---------------------------------------------------------------
+     * ENVIRONMENT DIRECTORY NAME
+     * ---------------------------------------------------------------
+     *
+     * This variable must contain the name of the directory where
+     * the .env file is located.
+     * Please consider security implications when changing this
+     * value - the directory should not be publicly accessible.
+     */
+    public string $envDirectory = __DIR__ . '/../../';
+
 }

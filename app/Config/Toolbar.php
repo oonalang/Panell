@@ -84,4 +84,73 @@ class Toolbar extends BaseConfig
 	 * @var integer
 	 */
 	public $maxQueries = 100;
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * --------------------------------------------------------------------------
+     * Collect Var Data
+     * --------------------------------------------------------------------------
+     *
+     * If set to false var data from the views will not be collected. Useful to
+     * avoid high memory usage when there are lots of data passed to the view.
+     */
+    public bool $collectVarData = true;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Ignored HTTP Headers
+     * --------------------------------------------------------------------------
+     *
+     * CodeIgniter Debug Toolbar normally injects HTML and JavaScript into every
+     * HTML response. This is correct for full page loads, but it breaks requests
+     * that expect only a clean HTML fragment.
+     *
+     * Libraries like HTMX, Unpoly, and Hotwire (Turbo) update parts of the page or
+     * manage navigation on the client side. Injecting the Debug Toolbar into their
+     * responses can cause invalid HTML, duplicated scripts, or JavaScript errors
+     * (such as infinite loops or "Maximum call stack size exceeded").
+     *
+     * Any request containing one of the following headers is treated as a
+     * client-managed or partial request, and the Debug Toolbar injection is skipped.
+     *
+     * @var array<string, string|null>
+     */
+    public array $disableOnHeaders = [
+        'X-Requested-With' => 'xmlhttprequest', // AJAX requests
+        'HX-Request'       => 'true',           // HTMX requests
+        'X-Up-Version'     => null,             // Unpoly partial requests
+    ];
+
+    /**
+     * --------------------------------------------------------------------------
+     * Watched Directories
+     * --------------------------------------------------------------------------
+     *
+     * Contains an array of directories that will be watched for changes and
+     * used to determine if the hot-reload feature should reload the page or not.
+     * We restrict the values to keep performance as high as possible.
+     *
+     * NOTE: The ROOTPATH will be prepended to all values.
+     *
+     * @var list<string>
+     */
+    public array $watchedDirectories = [
+        'app',
+    ];
+
+    /**
+     * --------------------------------------------------------------------------
+     * Watched File Extensions
+     * --------------------------------------------------------------------------
+     *
+     * Contains an array of file extensions that will be watched for changes and
+     * used to determine if the hot-reload feature should reload the page or not.
+     *
+     * @var list<string>
+     */
+    public array $watchedExtensions = [
+        'php', 'css', 'js', 'html', 'svg', 'json', 'env',
+    ];
+
 }

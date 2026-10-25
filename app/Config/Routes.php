@@ -36,29 +36,29 @@ if (ENVIRONMENT === 'development') {
 }
 $routes->get('logout', 'Auth::logout');
 $routes->get('dashboard', 'User::index');
-$routes->match(['get', 'post'], '/', 'Auth::login');
-$routes->match(['get', 'post'], 'login', 'Auth::login');
-$routes->match(['get', 'post'], 'register', 'Auth::register');//Server
+$routes->match(['GET', 'POST'], '/', 'Auth::login');
+$routes->match(['GET', 'POST'], 'login', 'Auth::login');
+$routes->match(['GET', 'POST'], 'register', 'Auth::register');//Server
 
 
 
 //
-$routes->match(['get', 'post'], 'settings', 'User::settings');
-$routes->match(['get', 'post'], 'verify_pass', 'User::verify_pass');
-$routes->match(['get', 'post'], 'token', 'User::token');
-$routes->match(['get', 'post'], 'Forget', 'User::Forget');
-$routes->match(['get', 'post'], 'update', 'User::update');
-$routes->match(['get', 'post'], 'Server', 'User::Server');
-$routes->match(['get'],'alter','Keys::alterUser');
-$routes->match(['get', 'post'], 'lib', 'User::lib');
-$routes->match(['get', 'post'], 'PrivateDashboard', 'User::PrivateDashboard');
-$routes->match(['get', 'post'], 'ManageHackingAttempt', 'User::ManageHackingAttempt');
-$routes->match(['get', 'post'], 'ExtendDuration', 'User::ExtendDuration');
-$routes->match(['get', 'post'], 'ManageShortenerLinks', 'User::ManageShortenerLinks');
+$routes->match(['GET', 'POST'], 'settings', 'User::settings');
+$routes->match(['GET', 'POST'], 'verify_pass', 'User::verify_pass');
+$routes->match(['GET', 'POST'], 'token', 'User::token');
+$routes->match(['GET', 'POST'], 'Forget', 'User::Forget');
+$routes->match(['GET', 'POST'], 'update', 'User::update');
+$routes->match(['GET', 'POST'], 'Server', 'User::Server');
+$routes->match(['GET'],'alter','Keys::alterUser');
+$routes->match(['GET', 'POST'], 'lib', 'User::lib');
+$routes->match(['GET', 'POST'], 'PrivateDashboard', 'User::PrivateDashboard');
+$routes->match(['GET', 'POST'], 'ManageHackingAttempt', 'User::ManageHackingAttempt');
+$routes->match(['GET', 'POST'], 'ExtendDuration', 'User::ExtendDuration');
+$routes->match(['GET', 'POST'], 'ManageShortenerLinks', 'User::ManageShortenerLinks');
 
-$routes->match(['get', 'post'], 'Links', 'User::Links');
-$routes->match(['get', 'post'], 'DeleteAllHistory', 'User::DeleteAllHistory');
-$routes->match(['get', 'post'], 'ClearAllHistory', 'User::ClearAllHistory');
+$routes->match(['GET', 'POST'], 'Links', 'User::Links');
+$routes->match(['GET', 'POST'], 'DeleteAllHistory', 'User::DeleteAllHistory');
+$routes->match(['GET', 'POST'], 'ClearAllHistory', 'User::ClearAllHistory');
 
 
 
@@ -66,47 +66,47 @@ $routes->match(['get', 'post'], 'ClearAllHistory', 'User::ClearAllHistory');
 
 //
 //testing
-$routes->match(['get', 'post'], 'New', 'Home::index');
+$routes->match(['GET', 'POST'], 'New', 'Home::index');
 //$routes->get('server', 'User::server');
 //
 
 $routes->group('keys', function ($routes) {
-	$routes->match(['get', 'post'], '/', 'Keys::index');
-	$routes->match(['get', 'post'], 'generate', 'Keys::generate');
-	$routes->match(['get', 'post'], 'ExtendDurationKey', 'Keys::ExtendDurationKey');
+	$routes->match(['GET', 'POST'], '/', 'Keys::index');
+	$routes->match(['GET', 'POST'], 'generate', 'Keys::generate');
+	$routes->match(['GET', 'POST'], 'ExtendDurationKey', 'Keys::ExtendDurationKey');
 	$routes->get('(:num)', 'Keys::edit_key/$1');
 	$routes->get('reset', 'Keys::api_key_reset');
 	$routes->post('edit', 'Keys::edit_key');
-	$routes->match(['get', 'post'], 'api', 'Keys::api_get_keys');
+	$routes->match(['GET', 'POST'], 'api', 'Keys::api_get_keys');
 	
-	$routes->match(['get'],'alter','Keys::alterKeys');
-	$routes->match(['get'],'download/all','Keys::download_all_Keys');
-	$routes->match(['get'],'download/new','Keys::download_new_Keys');
+	$routes->match(['GET'],'alter','Keys::alterKeys');
+	$routes->match(['GET'],'download/all','Keys::download_all_Keys');
+	$routes->match(['GET'],'download/new','Keys::download_new_Keys');
 	$routes->get('delete', 'Keys::api_key_delete');
-	$routes->match(['get'],'delete','Keys::deleteKeys');
-	$routes->match(['get'],'start','Keys::startDate');
-	$routes->match(['get'],'DelKeygen','Keys::deleteallkeygen');
-    $routes->match(['get'],'Un-UsedKeygen','Keys::Unusedkeygen');
-    $routes->match(['get'],'Del-EXPKeygen','Keys::deleteEXPkeygen');
-    $routes->match(['get'],'DelblockKeys','Keys::deleteBLOCKKeys');
-    $routes->match(['get'],'DelEXPKeys','Keys::deleteEXPKeys');
-    $routes->match(['get'],'resetAll','Keys::resetDeviceKey');
+	$routes->match(['GET'],'delete','Keys::deleteKeys');
+	$routes->match(['GET'],'start','Keys::startDate');
+	$routes->match(['GET'],'DelKeygen','Keys::deleteallkeygen');
+    $routes->match(['GET'],'Un-UsedKeygen','Keys::Unusedkeygen');
+    $routes->match(['GET'],'Del-EXPKeygen','Keys::deleteEXPkeygen');
+    $routes->match(['GET'],'DelblockKeys','Keys::deleteBLOCKKeys');
+    $routes->match(['GET'],'DelEXPKeys','Keys::deleteEXPKeys');
+    $routes->match(['GET'],'resetAll','Keys::resetDeviceKey');
 });
 
 $routes->group('admin', ['filter' => 'admin'], function ($routes) {
-	$routes->match(['get', 'post'], 'create-referral', 'User::ref_index');
-	$routes->match(['get', 'post'], 'manage-users', 'User::manage_users');
-	$routes->match(['get', 'post'], 'user/(:num)', 'User::user_edit/$1');
-	$routes->match(['get'],'user/delete/(:num)','User::user_delete/$1');
+	$routes->match(['GET', 'POST'], 'create-referral', 'User::ref_index');
+	$routes->match(['GET', 'POST'], 'manage-users', 'User::manage_users');
+	$routes->match(['GET', 'POST'], 'user/(:num)', 'User::user_edit/$1');
+	$routes->match(['GET'],'user/delete/(:num)','User::user_delete/$1');
 	
-	$routes->match(['get', 'post'], 'referral/(:num)', 'User::referral_edit/$1');
-	$routes->match(['get'],'referral/delete/(:num)','User::referral_delete/$1');
+	$routes->match(['GET', 'POST'], 'referral/(:num)', 'User::referral_edit/$1');
+	$routes->match(['GET'],'referral/delete/(:num)','User::referral_delete/$1');
 	
-	$routes->match(['get', 'post'], 'EditReferral', 'User::EditReferral');
+	$routes->match(['GET', 'POST'], 'EditReferral', 'User::EditReferral');
 
 	/* --------------------------- Admin API Grouping -------------------------- */
 	$routes->group('api', function ($routes) {
-		$routes->match(['get', 'post'], 'users', 'User::api_get_users');
+		$routes->match(['GET', 'POST'], 'users', 'User::api_get_users');
 	});
 });
 
@@ -117,8 +117,8 @@ $routes->get('admin/loader-catalog', 'LoaderCatalogAdmin::index', ['filter' => '
 $routes->post('admin/loader-catalog/save', 'LoaderCatalogAdmin::save', ['filter' => 'admin']);
 $routes->post('admin/loader-catalog/remove', 'LoaderCatalogAdmin::remove', ['filter' => 'admin']);
 
-$routes->match(['get', 'post'], 'connect', 'Connect::index');
-$routes->match(['get', 'post'], 'member-key', 'Keys::memberKey');
+$routes->match(['GET', 'POST'], 'connect', 'Connect::index');
+$routes->match(['GET', 'POST'], 'member-key', 'Keys::memberKey');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

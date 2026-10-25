@@ -92,4 +92,27 @@ class Security extends BaseConfig
 	 * @deprecated
 	 */
 	public $samesite = 'Lax';
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Protection Method
+     * --------------------------------------------------------------------------
+     *
+     * Protection Method for Cross Site Request Forgery protection.
+     *
+     * @var string 'cookie' or 'session'
+     */
+    public string $csrfProtection = 'cookie';
+
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Token Randomization
+     * --------------------------------------------------------------------------
+     *
+     * Randomize the CSRF Token for added security.
+     */
+    public bool $tokenRandomize = false;
+
 }

@@ -27,6 +27,18 @@ class App extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
+	 * ALLOWED HOSTNAMES
+	 * --------------------------------------------------------------------------
+	 *
+	 * A list of hostnames that the site accepts in addition to the one in
+	 * the base URL above. Requests from any other hostname are rejected.
+	 *
+	 * @var list<string>
+	 */
+	public array $allowedHostnames = [];
+
+	/**
+	 * --------------------------------------------------------------------------
 	 * Index File
 	 * --------------------------------------------------------------------------
 	 *
@@ -56,6 +68,19 @@ class App extends BaseConfig
 	 * @var string
 	 */
 	public $uriProtocol = 'REQUEST_URI';
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * PERMITTED URI CHARACTERS
+	 * --------------------------------------------------------------------------
+	 *
+	 * By default, only these are allowed: `a-z 0-9~%.:_-`
+	 *
+	 * Set an empty string to allow all characters.
+	 *
+	 * @var string
+	 */
+	public string $permittedURIChars = 'a-z 0-9~%.:_\-';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -337,12 +362,17 @@ class App extends BaseConfig
 	 * You can use both an array or a comma-separated list of proxy addresses,
 	 * as well as specifying whole subnets. Here are a few examples:
 	 *
-	 * Comma-separated:	'10.0.1.200,192.168.5.0/24'
-	 * Array: ['10.0.1.200', '192.168.5.0/24']
+	 * Array of proxy IP addresses (or CIDR ranges) mapped to the HTTP
+	 * header that carries the real client address, for example:
 	 *
-	 * @var string|string[]
+	 *     ['10.0.1.200' => 'X-Forwarded-For']
+	 *
+	 * Leave empty when the server is not behind a trusted proxy, so client
+	 * addresses are read from REMOTE_ADDR only.
+	 *
+	 * @var array<string, string>
 	 */
-	public $proxyIPs = '';
+	public array $proxyIPs = [];
 
 	/**
 	 * --------------------------------------------------------------------------

@@ -40,4 +40,14 @@ class Honeypot extends BaseConfig
 	 * @var string
 	 */
 	public $container = '<div style="display:none">{template}</div>';
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * The id attribute for Honeypot container tag
+     *
+     * Used when CSP is enabled.
+     */
+    public string $containerId = 'hpc';
+
 }

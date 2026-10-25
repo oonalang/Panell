@@ -164,4 +164,27 @@ class ContentSecurityPolicy extends BaseConfig
 	 * @var string|string[]|null
 	 */
 	public $sandbox = null;
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * Replace nonce tag automatically?
+     */
+    public bool $autoNonce = true;
+
+    /**
+     * Specifies a reporting endpoint to which violation reports ought to be sent.
+     */
+    public ?string $reportTo = null;
+
+    /**
+     * Nonce placeholder for script tags.
+     */
+    public string $scriptNonceTag = '{csp-script-nonce}';
+
+    /**
+     * Nonce placeholder for style tags.
+     */
+    public string $styleNonceTag = '{csp-style-nonce}';
+
 }

@@ -76,4 +76,16 @@ class Format extends BaseConfig
 	{
 		return Services::format()->getFormatter($mime);
 	}
+
+    // --- CodeIgniter 4.7 configuration added by the PHP 8 migration ---
+
+    /**
+     * --------------------------------------------------------------------------
+     * Maximum depth for JSON encoding.
+     * --------------------------------------------------------------------------
+     *
+     * This value determines how deep the JSON encoder will traverse nested structures.
+     */
+    public int $jsonEncodeDepth = 512;
+
 }
